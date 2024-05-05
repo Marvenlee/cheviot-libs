@@ -5,7 +5,8 @@ lib_LIBRARIES = librpihal.a
 librpihal_a_SOURCES = \
   hal_arm.S \
   hal_mailbox.c \
-  hal_mmio.c
+  hal_mmio.c \
+  hal_cache.c
     
 nobase_include_HEADERS = machine/cheviot_hal.h \
                          machine/board/hal_arm.h \

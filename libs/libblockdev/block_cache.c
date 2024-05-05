@@ -162,11 +162,6 @@ struct buf *get_block(struct block_cache *cache, off64_t block, int opt)
 		buf->block = block;
 		buf->dirty = false;
 		buf->in_use = true;
-
-		uint32_t *beef = buf->data;
-		for (int t=0; t <cache->block_size/4; t++) {
-			beef[t]=0xdeadbeef;
-		}
 	  
 		hash = buf->block % BUF_HASH_CNT;
 		LIST_ADD_HEAD (&cache->hash_list[hash], buf, hash_link);
@@ -192,6 +187,7 @@ struct buf *get_block(struct block_cache *cache, off64_t block, int opt)
 		return buf;
 		
 	} else {
+		LIST_REM_ENTRY (&cache->lru_list, buf, lru_link);
 	  buf->in_use = true;
 		return buf;
 	}
@@ -201,7 +197,10 @@ struct buf *get_block(struct block_cache *cache, off64_t block, int opt)
 /* @brief   Release a cached block, depending oo flags write block if dirty
  *
  * @param   cache, the cache the block belongs to 
- * @param   buf, cached block to release 
+ * @param   buf, cached block to release
+ *
+ * TODO: File blocks shouldn't be reused again soon as they will be cached
+ * by the VFS.  We don't want them to expunge system blocks from the cache.
  */
 void put_block(struct block_cache *cache, struct buf *buf)
 {

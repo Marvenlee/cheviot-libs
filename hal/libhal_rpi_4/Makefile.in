@@ -139,7 +139,7 @@ am__v_AR_1 =
 librpihal_a_AR = $(AR) $(ARFLAGS)
 librpihal_a_LIBADD =
 am_librpihal_a_OBJECTS = hal_arm.$(OBJEXT) hal_mailbox.$(OBJEXT) \
-	hal_mmio.$(OBJEXT)
+	hal_mmio.$(OBJEXT) hal_cache.$(OBJEXT)
 librpihal_a_OBJECTS = $(am_librpihal_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -156,7 +156,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/hal_arm.Po \
+am__depfiles_remade = ./$(DEPDIR)/hal_arm.Po ./$(DEPDIR)/hal_cache.Po \
 	./$(DEPDIR)/hal_mailbox.Po ./$(DEPDIR)/hal_mmio.Po
 am__mv = mv -f
 CPPASCOMPILE = $(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -308,7 +308,8 @@ lib_LIBRARIES = librpihal.a
 librpihal_a_SOURCES = \
   hal_arm.S \
   hal_mailbox.c \
-  hal_mmio.c
+  hal_mmio.c \
+  hal_cache.c
 
 nobase_include_HEADERS = machine/cheviot_hal.h \
                          machine/board/hal_arm.h \
@@ -394,6 +395,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_arm.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_cache.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_mailbox.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_mmio.Po@am__quote@ # am--include-marker
 
@@ -586,6 +588,7 @@ clean-am: clean-generic clean-libLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/hal_arm.Po
+	-rm -f ./$(DEPDIR)/hal_cache.Po
 	-rm -f ./$(DEPDIR)/hal_mailbox.Po
 	-rm -f ./$(DEPDIR)/hal_mmio.Po
 	-rm -f Makefile
@@ -634,6 +637,7 @@ installcheck-am:
 
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/hal_arm.Po
+	-rm -f ./$(DEPDIR)/hal_cache.Po
 	-rm -f ./$(DEPDIR)/hal_mailbox.Po
 	-rm -f ./$(DEPDIR)/hal_mmio.Po
 	-rm -f Makefile

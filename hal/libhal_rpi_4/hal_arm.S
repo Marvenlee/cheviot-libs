@@ -254,81 +254,27 @@ hal_invalidate_tlb:
 .endm
 
 
-/* @brief   Invalidate the current CPU's data cache
- *
- * void hal_invalidate_dcache(void *start_vaddr, void *end_vaddr);
- *
- * Invalidates the cache content that are between addresses
- * start_vaddr and end_vaddr.
- *
- * Call this after a DMA operation writes data to main memory
- * so that the CPU does not pick up stale data. Performs the DCIMVAC
- * operation on this memory range.
- *
- * This is based on Phoenix-RTOS source
- */
-hal_invalidate_dcache:
-	dsb
-	calc_cache_lines
-inval_line:
+.global hal_get_ccsidr
+hal_get_ccsidr:
+  mrc p15, 0, r0, c0, c0, 0
+  bx lr
+
+.global hal_cache_dcimvac
+hal_cache_dcimvac:
 	mcr p15, 0, r0, c7, c6, 1
-	add r0, r0, r2
-	cmp r0, r1
-	blo inval_line
-	dsb
-	isb
 	bx lr
-
-
-/* @brief   Clean the data cache
- *
- * void hal_clean_dcache(void *start_vaddr, void *end_vaddr);
- *
- * Cleans the cache content that are between addresses
- * start_vaddr and end_vaddr. Performs the DCCMVAC operation
- * on this memory range.
- *
- * This is based on Phoenix-RTOS source
- */
-hal_clean_dcache:
-	dsb
-  calc_cache_lines
-clean_line:
+	
+.global hal_cache_dccmvac
+hal_cache_dccmvac:
 	mcr p15, 0, r0, c7, c10, 1
-	add r0, r0, r2
-	cmp r0, r1
-	blo clean_line
-	dsb
-	isb
-	bx lr
+  bx lr
+  
 
-
-/* @brief   Flush the data cache
- *
- * void hal_flush_dcache(void *start_vaddr, void *end_vaddr);
- *
- * Flushes the cache content that are between addresses
- * start_vaddr and end_vaddr.
- *
- * Call this prior to a DMA operation that reads data so that
- * data is written to main memory before a DMA device reads
- * from it. Performs the DCCIMVAC operation on this memory range.
- *
- * This is based on Phoenix-RTOS source
- */
-hal_flush_dcache:
-	dsb
-	calc_cache_lines
-flush_line:
+.global hal_cache_dccimvac
+hal_cache_dccimvac:
 	mcr p15, 0, r0, c7, c14, 1
-	add r0, r0, r2
-	cmp r0, r1
-	blo flush_line
-	dsb
-	isb
-	bx lr
-
-
-
+  bx lr
+  
 .end
+
 

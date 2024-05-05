@@ -297,6 +297,8 @@ void hal_set_ttbr1(uint32_t reg);
 uint32_t hal_get_tlb_type(void);
 void hal_set_tlb_type(uint32_t reg);
 
+uint32_t hal_get_ccsidr(void);
+
 void hal_isb(void);
 void hal_dsb(void);
 void hal_dmb(void);
@@ -311,6 +313,11 @@ void hal_invalidate_tlb(void);
 void hal_invalidate_dcache(void *start_vaddr, void *end_vaddr);
 void hal_clean_dcache(void *start_vaddr, void *end_vaddr);
 void hal_flush_dcache(void *start_vaddr, void *end_vaddr);
+
+uint32_t hal_cache_line_size(void);
+void hal_cache_dcimvac(uint32_t addr);
+void hal_cache_dccmvac(uint32_t addr);
+void hal_cache_dccimvac(uint32_t addr);
 
 
 #endif
