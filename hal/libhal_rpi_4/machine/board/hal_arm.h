@@ -139,6 +139,12 @@ typedef uint32_t pde_t;
 
 
 /*
+ * CPU Extended Control Register (CPUECTLR) flags
+ */
+#define CPUECTLR_SMPEN         (1 << 6)  /* Enable cache-coherency protocols between CPU cores */
+
+
+/*
  * Secure Configuration Register (SCR) flags
  */
 #define SCR_NS          (1 << 0)  /* Bit 0: Non-secure */
@@ -209,7 +215,7 @@ typedef uint32_t pde_t;
 #define L2_TYPE_S     0x02        // PTE ARMv6 4k Small Page
 
 #define L2_NG       (1 << 11)     // Non-Global (when set uses ASID)
-#define L2_S        (1 << 10)     // shared by other processors (used for page tables?)
+#define L2_S        (1 << 10)     // shared by other processors
 #define L2_AP2      (1 << 9)      // Access permissions AP[2]
 #define L2_TEX(x)   ((x) << 6)    // 3 bit memory-access ordering
 #define L2_AP1      (1 << 5)      // Access permissions AP[1]
@@ -287,6 +293,10 @@ void hal_set_actlr(uint32_t reg);
 
 uint32_t hal_get_sctlr(void);
 void hal_set_sctlr(uint32_t reg);
+
+uint32_t hal_get_cpuectlr(void);
+void hal_set_cpuectlr(uint32_t reg);
+
 uint32_t hal_get_ttbcr(void);
 void hal_set_ttbcr(uint32_t reg);  
 uint32_t hal_get_ttbr0(void);

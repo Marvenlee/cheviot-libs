@@ -17,6 +17,11 @@
 
 .global hal_get_sctlr
 .global hal_set_sctlr  
+.global hal_get_actlr
+.global hal_set_actlr  
+.global hal_get_cpuectlr
+.global hal_set_cpuectlr  
+
 .global hal_get_ttbcr
 .global hal_set_ttbcr  
 .global hal_get_ttbr0 
@@ -112,6 +117,22 @@ hal_set_sctlr:
   mcr p15, 0, r0, c1, c0, 0 // Write R0 to SCTLR
   bx lr
 
+hal_get_actlr:
+  mrc p15, 0, r0, c1, c0, 1 // Read ACTLR into R0
+  bx lr
+
+hal_set_actlr:  
+  mcr p15, 0, r0, c1, c0, 1 // Write R0 to ACTLR
+  bx lr
+  
+hal_get_cpuectlr:
+  mrrc p15, 1, r0, r1, c15  // Read CPUECTLR into R0
+  bx lr
+  
+hal_set_cpuectlr:
+  mcrr p15, 1, r0, r1, c15  // Write R0 to CPUECTLR  
+  bx lr
+  
 hal_get_ttbcr:
   mrc p15, 0, r0, c2, c0, 2 // Read TTBCR into R0
   bx lr
