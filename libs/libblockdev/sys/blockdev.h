@@ -66,13 +66,12 @@ struct block_cache
   off64_t lba_start;
   off64_t lba_end;
   
-  //  size_t sector_size;
-  //  size_t sectors_per_block;
-  
   struct buf *buf_table;
   int buf_cnt;
 
-  buf_list_t free_list;
+  int avail_buf_cnt;
+  int read_ahead_blocks;
+
   buf_list_t lru_list;
   buf_list_t hash_list[BUF_HASH_CNT];
 };
@@ -91,7 +90,6 @@ struct buf
   bool valid;
   bool dirty;
   
-  buf_link_t free_link;
   buf_link_t lru_link;
   buf_link_t hash_link;
 };
@@ -102,8 +100,9 @@ struct buf
  */ 
 
 // block_cache.c
-struct block_cache *init_block_cache(int dev_fd, int buf_cnt, size_t block_size);
+struct block_cache *init_block_cache(int dev_fd, int buf_cnt, size_t block_size, int read_ahead_blocks);
 struct buf *get_block(struct block_cache *cache, off64_t block, int opt);
+struct buf *get_block_readahead(struct block_cache *cache, off64_t start_block);
 void put_block(struct block_cache *cache, struct buf *buf);
 void invalidate_block(struct block_cache *cache, off64_t block);
 void block_markdirty(struct buf *bp);
