@@ -28,6 +28,10 @@
 .global hal_set_ttbr0
 .global hal_get_ttbr1 
 .global hal_set_ttbr1
+.global hal_get_cpacr
+.global hal_set_cpacr
+.global hal_get_fpexc
+.global hal_set_fpexc
 
 .global hal_isb
 .global hal_dsb
@@ -156,6 +160,22 @@ hal_get_ttbr1:
 hal_set_ttbr1:
   mcr p15, 0, r0, c2, c0, 1 // Write R0 to 32-bit TTBR1  
   bx lr
+
+hal_get_cpacr:
+  mrc p15, 0, r0, c1, c0, 2
+  mov pc, lr
+
+hal_set_cpacr:
+  mcr p15, 0, r0, c1, c0, 2
+  mov pc, lr
+
+hal_get_fpexc:
+  vmrs r0, FPEXC
+  mov pc, lr
+  
+hal_set_fpexc:
+  vmsr FPEXC, r0
+  mov pc, lr
 
 
 /* @brief   ISB helper macro

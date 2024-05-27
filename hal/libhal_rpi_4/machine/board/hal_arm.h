@@ -330,4 +330,11 @@ void hal_cache_dccmvac(uint32_t addr);
 void hal_cache_dccimvac(uint32_t addr);
 
 
+uint32_t hal_get_cpacr(void);
+void hal_set_cpacr(uint32_t val);
+
+uint32_t hal_get_fpexc(void);
+void hal_set_fpexc(uint32_t val);
+
+
 #endif
