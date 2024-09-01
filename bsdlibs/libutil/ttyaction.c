@@ -43,7 +43,7 @@ __RCSID("$NetBSD: ttyaction.c,v 1.19 2008/04/28 20:23:03 martin Exp $");
 #include <sys/wait.h>
 
 #include <assert.h>
-//#include <err.h>
+#include <err.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <fnmatch.h>

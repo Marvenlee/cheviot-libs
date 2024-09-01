@@ -44,7 +44,7 @@ __RCSID("$NetBSD: pw_gensalt.c,v 1.7 2009/01/18 12:15:27 lukem Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-//#include <err.h>
+#include <err.h>
 #include <grp.h>
 #include <pwd.h>
 #include <util.h>

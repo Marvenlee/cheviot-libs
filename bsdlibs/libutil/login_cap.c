@@ -47,7 +47,7 @@ __RCSID("$NetBSD: login_cap.c,v 1.32 2015/07/11 09:21:22 kamil Exp $");
 
 #include <assert.h>
 #include <ctype.h>
-//#include <err.h>
+#include <err.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>

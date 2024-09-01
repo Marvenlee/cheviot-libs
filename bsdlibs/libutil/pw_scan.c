@@ -50,7 +50,7 @@ __RCSID("$NetBSD: pw_scan.c,v 1.23 2012/03/13 21:13:36 christos Exp $");
 #include <sys/types.h>
 
 #include <assert.h>
-//#include <err.h>
+#include <err.h>
 #include <limits.h>
 #include <pwd.h>
 #include <stdio.h>

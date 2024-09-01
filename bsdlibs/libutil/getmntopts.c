@@ -42,7 +42,7 @@ __RCSID("$NetBSD: getmntopts.c,v 1.4 2007/08/26 22:46:15 pooka Exp $");
 #include <sys/param.h>
 #include <sys/mount.h>
 
-//#include <err.h>
+#include <err.h>
 #include <errno.h>
 //#include <fstab.h>
 #include <stdlib.h>
