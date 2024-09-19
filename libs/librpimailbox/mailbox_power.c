@@ -25,7 +25,7 @@ int rpi_mailbox_get_power_state(uint32_t device_id, uint32_t *state)
 	uint32_t request[1];
 	uint32_t response[2];
 	
-	sc = rpi_mailbox(MBOX_TAG_GET_POWER_STATE, &request, sizeof request, 
+	sc = rpi_mailbox(MBOX_TAG_GET_POWER_STATE, request, sizeof request, 
 									 response, sizeof response);
 	
 	if (sc != 0) {
@@ -43,7 +43,7 @@ int rpi_mailbox_set_power_state(uint32_t device_id, uint32_t state)
 	uint32_t request[2];
 	uint32_t response[2];
 	
-	sc = rpi_mailbox(MBOX_TAG_SET_POWER_STATE, &request, sizeof request,
+	sc = rpi_mailbox(MBOX_TAG_SET_POWER_STATE, request, sizeof request,
 									 response, sizeof response);
 	
 	if (sc != 0) {

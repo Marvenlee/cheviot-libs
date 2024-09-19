@@ -45,6 +45,7 @@ __RCSID("$NetBSD: rec_utils.c,v 1.14 2013/12/14 18:04:56 christos Exp $");
 
 #include <db.h>
 #include "recno.h"
+#include "recno_extern.h"
 
 /*
  * __rec_ret --

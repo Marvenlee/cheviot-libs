@@ -27,7 +27,7 @@ int rpi_mailbox_get_clock_state(uint32_t device_id, uint32_t *state)
 
 	request[0] = device_id;
 	
-	sc = rpi_mailbox(MBOX_TAG_GET_CLOCK_STATE, &request, sizeof request,
+	sc = rpi_mailbox(MBOX_TAG_GET_CLOCK_STATE, request, sizeof request,
 									 response, sizeof response);
 	
 	if (sc != 0) {
@@ -48,7 +48,7 @@ int rpi_mailbox_set_clock_state(uint32_t device_id, uint32_t state)
 	request[0] = device_id;
 	request[1] = state;
 	
-	sc = rpi_mailbox(MBOX_TAG_SET_CLOCK_STATE, &request, sizeof request,
+	sc = rpi_mailbox(MBOX_TAG_SET_CLOCK_STATE, request, sizeof request,
 									 response, sizeof response);
 	
 	if (sc != 0) {
@@ -65,7 +65,7 @@ int rpi_mailbox_get_clock_rate(uint32_t device_id, uint32_t *rate)
 	uint32_t request[1];
 	uint32_t response[2];
 	
-	sc = rpi_mailbox(MBOX_TAG_GET_CLOCK_RATE, &request, sizeof request,
+	sc = rpi_mailbox(MBOX_TAG_GET_CLOCK_RATE, request, sizeof request,
 									 response, sizeof response);
 	
 	if (sc != 0) {

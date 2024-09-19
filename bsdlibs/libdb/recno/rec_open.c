@@ -57,6 +57,7 @@ __RCSID("$NetBSD: rec_open.c,v 1.20 2013/12/01 00:22:48 christos Exp $");
 
 #include <db.h>
 #include "recno.h"
+#include "recno_extern.h"
 
 
 int	 __rec_close(DB *);

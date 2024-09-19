@@ -42,7 +42,7 @@ name:;                              \
 #define SYSCALL5 SYSCALL_SWI5
 #define SYSCALL6 SYSCALL_SWI6
 
-SYSCALL2( _swi_rpi_configure_gpio, 96)
+SYSCALL3( _swi_rpi_configure_gpio, 96)
 SYSCALL2( _swi_rpi_set_gpio, 97)
-
+SYSCALL1( _swi_rpi_get_gpio, 99)
 

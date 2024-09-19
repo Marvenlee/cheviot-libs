@@ -49,6 +49,7 @@ __RCSID("$NetBSD: rec_close.c,v 1.15 2008/09/11 12:58:00 joerg Exp $");
 
 #include <db.h>
 #include "recno.h"
+#include "recno_extern.h"
 
 /*
  * __REC_CLOSE -- Close a recno tree.

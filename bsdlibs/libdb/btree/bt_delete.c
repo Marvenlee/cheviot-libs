@@ -49,6 +49,7 @@ __RCSID("$NetBSD: bt_delete.c,v 1.17 2009/01/29 02:02:36 lukem Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static int __bt_bdelete(BTREE *, const DBT *);
 static int __bt_curdel(BTREE *, const DBT *, PAGE *, u_int);

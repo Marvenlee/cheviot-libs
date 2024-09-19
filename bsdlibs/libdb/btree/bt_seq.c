@@ -50,6 +50,7 @@ __RCSID("$NetBSD: bt_seq.c,v 1.18 2013/09/04 13:03:22 ryoon Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static int __bt_first(BTREE *, const DBT *, EPG *, int *);
 static int __bt_seqadv(BTREE *, EPG *, int);

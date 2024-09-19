@@ -47,6 +47,7 @@ __RCSID("$NetBSD: rec_seq.c,v 1.14 2008/09/11 12:58:00 joerg Exp $");
 
 #include <db.h>
 #include "recno.h"
+#include "recno_extern.h"
 
 /*
  * __REC_SEQ -- Recno sequential scan interface.

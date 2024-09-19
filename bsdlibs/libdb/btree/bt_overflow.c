@@ -49,6 +49,7 @@ __RCSID("$NetBSD: bt_overflow.c,v 1.20 2013/12/14 18:04:56 christos Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 /*
  * Big key/data code.

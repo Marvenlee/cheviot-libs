@@ -44,6 +44,7 @@ __RCSID("$NetBSD: bt_conv.c,v 1.14 2008/09/10 17:52:35 joerg Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static void mswap(PAGE *);
 

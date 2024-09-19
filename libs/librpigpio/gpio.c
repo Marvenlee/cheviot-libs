@@ -21,6 +21,11 @@
 #include <errno.h>
 
 
+extern int _swi_rpi_configure_gpio(uint32_t pin, enum FSel fn, enum PullUpDown action);
+extern int _swi_rpi_set_gpio(uint32_t pin, bool state);
+extern int _swi_rpi_get_gpio(uint32_t pin);
+
+
 /*
  *
  */
@@ -53,7 +58,7 @@ int rpi_set_gpio(int pin, int state)
  */
 int rpi_get_gpio(int pin)
 {
-	return _swi_get_gpio(pin);
+	return _swi_rpi_get_gpio(pin);
 }
 
 

@@ -48,6 +48,7 @@ __RCSID("$NetBSD: bt_utils.c,v 1.16 2013/12/14 18:04:56 christos Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 /*
  * __bt_ret --

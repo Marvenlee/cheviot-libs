@@ -50,6 +50,7 @@ __RCSID("$NetBSD: bt_close.c,v 1.14 2008/09/11 12:58:00 joerg Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static int bt_meta(BTREE *);
 

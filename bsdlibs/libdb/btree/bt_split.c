@@ -50,6 +50,7 @@ __RCSID("$NetBSD: bt_split.c,v 1.20 2011/06/20 09:11:17 mrg Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static int	 bt_broot(BTREE *, PAGE *, PAGE *, PAGE *);
 static PAGE	*bt_page(BTREE *, PAGE *, PAGE **, PAGE **, indx_t *, size_t);

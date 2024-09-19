@@ -45,7 +45,7 @@ __RCSID("$NetBSD: passwd.c,v 1.52 2012/06/25 22:32:47 abs Exp $");
 
 #include <assert.h>
 #include <ctype.h>
-//#include <err.h>
+#include <err.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>

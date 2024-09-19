@@ -49,6 +49,7 @@ __RCSID("$NetBSD: rec_get.c,v 1.18 2013/12/25 19:42:23 christos Exp $");
 
 #include <db.h>
 #include "recno.h"
+#include "recno_extern.h"
 
 /*
  * __REC_GET -- Get a record from the btree.

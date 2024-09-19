@@ -964,7 +964,7 @@ void setkey(const char *key)
 /*
  * "encrypt" routine (for backwards compatibility)
  */
-void encrypt(char *block, int flag)
+int encrypt(char *block, int flag)
 {
 	int i, j, k;
 	C_block cblock;
@@ -987,6 +987,7 @@ void encrypt(char *block, int flag)
 		}
 	}
 	
+	return 0;
 }
 
 #ifdef DEBUG

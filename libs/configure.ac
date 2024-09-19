@@ -24,6 +24,7 @@ AC_CONFIG_FILES([
   libtermcap/Makefile
   librpimailbox/Makefile
   librpigpio/Makefile
+  libfdthelper/Makefile
   ])
   
 AC_OUTPUT

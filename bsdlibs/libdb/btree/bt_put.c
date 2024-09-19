@@ -50,6 +50,7 @@ __RCSID("$NetBSD: bt_put.c,v 1.20 2011/06/26 22:20:31 christos Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static EPG *bt_fast(BTREE *, const DBT *, const DBT *, int *);
 

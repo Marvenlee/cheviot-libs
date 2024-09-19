@@ -49,6 +49,7 @@ __RCSID("$NetBSD: rec_delete.c,v 1.17 2008/09/11 12:58:00 joerg Exp $");
 
 #include <db.h>
 #include "recno.h"
+#include "recno_extern.h"
 
 static int rec_rdelete(BTREE *, recno_t);
 

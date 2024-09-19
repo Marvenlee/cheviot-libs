@@ -49,6 +49,7 @@ __RCSID("$NetBSD: bt_get.c,v 1.13 2008/09/11 12:58:00 joerg Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 /*
  * __BT_GET -- Get a record from the btree.

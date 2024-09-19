@@ -1,7 +1,7 @@
-/*	$NetBSD: bt_page.c,v 1.13 2008/09/11 12:58:00 joerg Exp $	*/
+/*	$NetBSD: extern.h,v 1.8 2008/08/26 21:18:38 joerg Exp $	*/
 
 /*-
- * Copyright (c) 1990, 1993, 1994
+ * Copyright (c) 1991, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,74 +27,26 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *	@(#)extern.h	8.3 (Berkeley) 6/4/94
  */
 
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
+#include "../btree/btree_extern.h"
 
-#include <sys/cdefs.h>
-__RCSID("$NetBSD: bt_page.c,v 1.13 2008/09/11 12:58:00 joerg Exp $");
-
-#include "namespace.h"
-#include <sys/types.h>
-
-#include <assert.h>
-#include <stdio.h>
-
-#include <db.h>
-#include "btree.h"
-#include "btree_extern.h"
-
-/*
- * __bt_free --
- *	Put a page on the freelist.
- *
- * Parameters:
- *	t:	tree
- *	h:	page to free
- *
- * Returns:
- *	RET_ERROR, RET_SUCCESS
- *
- * Side-effect:
- *	mpool_put's the page.
- */
-int
-__bt_free(BTREE *t, PAGE *h)
-{
-	/* Insert the page at the head of the free list. */
-	h->prevpg = P_INVALID;
-	h->nextpg = t->bt_free;
-	t->bt_free = h->pgno;
-	F_SET(t, B_METADIRTY);
-
-	/* Make sure the page gets written back. */
-	return (mpool_put(t->bt_mp, h, MPOOL_DIRTY));
-}
-
-/*
- * __bt_new --
- *	Get a new page, preferably from the freelist.
- *
- * Parameters:
- *	t:	tree
- *	npg:	storage for page number.
- *
- * Returns:
- *	Pointer to a page, NULL on error.
- */
-PAGE *
-__bt_new(BTREE *t, pgno_t *npg)
-{
-	PAGE *h;
-
-	if (t->bt_free != P_INVALID &&
-	    (h = mpool_get(t->bt_mp, t->bt_free, 0)) != NULL) {
-		*npg = t->bt_free;
-		t->bt_free = h->nextpg;
-		F_SET(t, B_METADIRTY);
-		return (h);
-	}
-	return (mpool_new(t->bt_mp, npg));
-}
+int	 __rec_close(DB *);
+int	 __rec_delete(const DB *, const DBT *, u_int);
+int	 __rec_dleaf(BTREE *, PAGE *, uint32_t);
+int	 __rec_fd(const DB *);
+int	 __rec_fmap(BTREE *, recno_t);
+int	 __rec_fout(BTREE *);
+int	 __rec_fpipe(BTREE *, recno_t);
+int	 __rec_get(const DB *, const DBT *, DBT *, u_int);
+int	 __rec_iput(BTREE *, recno_t, const DBT *, u_int);
+int	 __rec_put(const DB *dbp, DBT *, const DBT *, u_int);
+int	 __rec_ret(BTREE *, EPG *, recno_t, DBT *, DBT *);
+EPG	*__rec_search(BTREE *, recno_t, enum SRCHOP);
+int	 __rec_seq(const DB *, DBT *, DBT *, u_int);
+int	 __rec_sync(const DB *, u_int);
+int	 __rec_vmap(BTREE *, recno_t);
+int	 __rec_vout(BTREE *);
+int	 __rec_vpipe(BTREE *, recno_t);

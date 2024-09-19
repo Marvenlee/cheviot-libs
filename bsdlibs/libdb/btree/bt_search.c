@@ -47,6 +47,7 @@ __RCSID("$NetBSD: bt_search.c,v 1.17 2008/09/11 12:58:00 joerg Exp $");
 
 #include <db.h>
 #include "btree.h"
+#include "btree_extern.h"
 
 static int __bt_snext(BTREE *, PAGE *, const DBT *, int *);
 static int __bt_sprev(BTREE *, PAGE *, const DBT *, int *);
