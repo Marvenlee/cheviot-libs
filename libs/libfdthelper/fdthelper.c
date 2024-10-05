@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#define LOG_LEVEL_INFO
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -158,8 +160,9 @@ int fdthelper_check_compat(const void *fdt, int offset, char *req_compat)
   if (prop == NULL) {
     return -1;
   }
-
+    
   if (strcmp(prop, req_compat) != 0) {
+    log_info("compat: %s", prop);
     return -1;
   }
 

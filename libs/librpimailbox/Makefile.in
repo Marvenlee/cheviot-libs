@@ -137,7 +137,7 @@ am__v_AR_1 =
 librpimailbox_a_AR = $(AR) $(ARFLAGS)
 librpimailbox_a_LIBADD =
 am_librpimailbox_a_OBJECTS = mailbox.$(OBJEXT) mailbox_clock.$(OBJEXT) \
-	mailbox_power.$(OBJEXT) syscall.$(OBJEXT)
+	mailbox_power.$(OBJEXT)
 librpimailbox_a_OBJECTS = $(am_librpimailbox_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -155,15 +155,8 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/mailbox.Po \
-	./$(DEPDIR)/mailbox_clock.Po ./$(DEPDIR)/mailbox_power.Po \
-	./$(DEPDIR)/syscall.Po
+	./$(DEPDIR)/mailbox_clock.Po ./$(DEPDIR)/mailbox_power.Po
 am__mv = mv -f
-CPPASCOMPILE = $(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CCASFLAGS) $(CCASFLAGS)
-AM_V_CPPAS = $(am__v_CPPAS_@AM_V@)
-am__v_CPPAS_ = $(am__v_CPPAS_@AM_DEFAULT_V@)
-am__v_CPPAS_0 = @echo "  CPPAS   " $@;
-am__v_CPPAS_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_@AM_V@)
@@ -307,8 +300,7 @@ lib_LIBRARIES = librpimailbox.a
 librpimailbox_a_SOURCES = \
 	mailbox.c \
   mailbox_clock.c \
-  mailbox_power.c \
-  syscall.S
+  mailbox_power.c
 
 nobase_include_HEADERS = sys/rpi_mailbox.h
 AM_CFLAGS = -O2 -std=c99 -g0 -I.
@@ -316,7 +308,7 @@ AM_CCASFLAGS = -r -I.
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .S .c .o .obj
+.SUFFIXES: .c .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -392,29 +384,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mailbox.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mailbox_clock.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mailbox_power.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/syscall.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
 	@echo '# dummy' >$@-t && $(am__mv) $@-t $@
 
 am--depfiles: $(am__depfiles_remade)
-
-.S.o:
-@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-@am__fastdepCCAS_TRUE@	$(CPPASCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-@am__fastdepCCAS_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(CPPASCOMPILE) -c -o $@ $<
-
-.S.obj:
-@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-@am__fastdepCCAS_TRUE@	$(CPPASCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-@am__fastdepCCAS_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(CPPASCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -585,7 +560,6 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/mailbox.Po
 	-rm -f ./$(DEPDIR)/mailbox_clock.Po
 	-rm -f ./$(DEPDIR)/mailbox_power.Po
-	-rm -f ./$(DEPDIR)/syscall.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -634,7 +608,6 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/mailbox.Po
 	-rm -f ./$(DEPDIR)/mailbox_clock.Po
 	-rm -f ./$(DEPDIR)/mailbox_power.Po
-	-rm -f ./$(DEPDIR)/syscall.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

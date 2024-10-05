@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef SYS_RPI_GPIO_H
-#define SYS_RPI_GPIO_H
+#ifndef SYS_GPIO_H
+#define SYS_GPIO_H
 
 #include <stdint.h>
 #include <machine/cheviot_hal.h>
+
+
+// Message subclass for gpio
+#define MSG_SUBCLASS_GPIO     2001
 
 
 /* GPIO Alternate Function Select (pin mux)
@@ -33,6 +37,7 @@ enum FSel
     FN1     = 5,
     FN2     = 6,
     FN3     = 7,
+    MAX_FSEL = 7
 };
 
 
@@ -42,17 +47,43 @@ enum PullUpDown
 {
     PULL_NONE = 0,
     PULL_UP   = 1,
-    PULL_DOWN = 2
+    PULL_DOWN = 2,
+    MAX_PUPDN = 2
+    
 };
+
+
+/*
+ *
+ */
+struct msg_gpio_req
+{
+  int cmd;
+  
+  union {
+    struct {
+      int gpio;
+      int state;
+    } setgpio;
+
+    struct {
+      int gpio;
+    } getgpio;
+  } u;
+};
+
+
+#define MSG_CMD_SETGPIO         1
+#define MSG_CMD_GETGPIO         2
 
 
 /*
  * Prototypes
  */
-
-int rpi_configure_gpio(int pin, enum FSel fn, enum PullUpDown action);
-int rpi_set_gpio(int pin, int state);
-int rpi_get_gpio(int pin);
+int init_gpio(void);
+void fini_gpio(void);
+int set_gpio(int pin, int state);
+int get_gpio(int pin);
 
 
 #endif

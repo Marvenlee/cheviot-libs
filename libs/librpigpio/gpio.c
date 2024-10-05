@@ -16,49 +16,70 @@
  */
 
 #include <stdint.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <machine/cheviot_hal.h>
+#include <sys/syscalls.h>
 #include <sys/rpi_gpio.h>
 #include <errno.h>
 
 
-extern int _swi_rpi_configure_gpio(uint32_t pin, enum FSel fn, enum PullUpDown action);
-extern int _swi_rpi_set_gpio(uint32_t pin, bool state);
-extern int _swi_rpi_get_gpio(uint32_t pin);
+// Statics
+static int _gpio_fd = -1;
 
 
 /*
  *
  */
-int rpi_configure_gpio(int pin, enum FSel fn, enum PullUpDown action)
+int init_gpio(void)
 {
-	int sc;
-	
-	sc = _swi_rpi_configure_gpio(pin, fn, action);
-
-	if (sc != 0) {
-		errno = sc;
-		return -1;
-	}
-	
-	return 0;
+  _gpio_fd = open("/dev/gpio", O_RDWR);
+  
+  if (_gpio_fd < 0) {
+    return -1;
+  }
+  
+  return 0;
 }
 
 
 /*
  *
  */
-int rpi_set_gpio(int pin, int state)
+void fini_gpio(void)
 {
-	return _swi_rpi_set_gpio(pin, state);
+  close(_gpio_fd);
 }
 
 
 /*
  *
  */
-int rpi_get_gpio(int pin)
+int set_gpio(int gpio, int state)
 {
-	return _swi_rpi_get_gpio(pin);
+  struct msg_gpio_req header;
+  msgiov_t siov[1] = {{.addr = &header, .size = sizeof header}};
+    
+  header.cmd = MSG_CMD_SETGPIO;
+  header.u.setgpio.gpio = gpio;
+  header.u.setgpio.state = state;
+  
+	return sendmsg(_gpio_fd, MSG_SUBCLASS_GPIO, 1, siov, 0, NULL);
+}
+
+
+/*
+ *
+ */
+int get_gpio(int gpio)
+{
+  struct msg_gpio_req header;
+  msgiov_t siov[1] = {{.addr = &header, .size = sizeof header}};
+    
+  header.cmd = MSG_CMD_GETGPIO;
+  header.u.getgpio.gpio = gpio;
+  
+	return sendmsg(_gpio_fd, MSG_SUBCLASS_GPIO, 1, siov, 0, NULL);
 }
 
 

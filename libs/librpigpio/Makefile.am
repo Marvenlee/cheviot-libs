@@ -1,8 +1,7 @@
 lib_LIBRARIES = librpigpio.a
 
 librpigpio_a_SOURCES = \
-	gpio.c \
-  syscall.S
+	gpio.c
   
 nobase_include_HEADERS = sys/rpi_gpio.h
 

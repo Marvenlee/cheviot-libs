@@ -20,6 +20,11 @@
 #include <stdint.h>
 #include <machine/cheviot_hal.h>
 
+// Message subclass for rpi_mailbox
+
+#define MSG_SUBCLASS_RPIMAILBOX     2000
+
+
 
 // Commands
 #define MBOX_TAG_GET_POWER_STATE		0x00020001
@@ -67,8 +72,69 @@
 
 
 /*
+ *
+ */
+struct mailbox_req
+{
+  int cmd;
+  
+  union {
+    struct {
+      int device_id;
+    } get_power_state;
+
+    struct {
+      int device_id;
+      uint32_t state;
+    } set_power_state;
+    
+    struct {
+      int device_id;
+    } get_clock_state;
+
+    struct {
+      int device_id;
+      uint32_t state;
+    } set_clock_state;
+
+    struct {
+      int device_id;
+    } get_clock_rate;
+  } u;
+};
+
+
+/*
+ *
+ */
+struct mailbox_resp
+{
+  union {
+    struct {
+      uint32_t state;
+    } get_power_state;
+    
+    struct {
+      uint32_t state;
+    } get_clock_state;
+
+    struct {
+      uint32_t rate;
+    } get_clock_rate;
+
+  } u;
+};
+
+
+// Globals
+extern int _mailbox_fd;
+
+/*
  * Prototypes
  */
+ 
+int init_mailbox(void);
+void fini_mailbox(void);
 
 int rpi_mailbox(uint32_t cmd, uint32_t *request, size_t req_sz,
 								uint32_t *response, size_t resp_sz);
@@ -82,6 +148,5 @@ int rpi_mailbox_set_clock_state(uint32_t device_id, uint32_t state);
 int rpi_mailbox_get_clock_rate(uint32_t device_id, uint32_t *rate);
 
 								
-
 
 #endif

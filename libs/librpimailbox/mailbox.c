@@ -15,30 +15,38 @@
  */
 
 #include <stdint.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <machine/cheviot_hal.h>
 #include "sys/rpi_mailbox.h"
 #include <errno.h>
 
 
-extern int _swi_rpi_mailbox(uint32_t cmd, uint32_t *request, size_t req_sz, 
-														uint32_t *response, size_t resp_sz);
-
+// globals
+int _mailbox_fd = -1;
 
 
 /*
  *
  */
-int rpi_mailbox(uint32_t cmd, uint32_t *request, size_t req_sz, uint32_t *response, size_t resp_sz)
+int init_mailbox(void)
 {
-	int sc;
-	
-	sc = _swi_rpi_mailbox(cmd, request, req_sz, response, resp_sz);
-		
-	if (sc != 0) {
-		errno = -sc;
-		return -1;
-	}
-
-	return 0;
+  _mailbox_fd = open("/dev/mailbox", O_RDWR);
+  
+  if (_mailbox_fd < 0) {
+    return -1;
+  }
+  
+  return 0;
 }
+
+
+/*
+ *
+ */
+void fini_mailbox(void)
+{
+  close(_mailbox_fd);
+}
+
 
