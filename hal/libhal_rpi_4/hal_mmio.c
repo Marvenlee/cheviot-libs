@@ -42,4 +42,16 @@ uint32_t hal_mmio_read(void *reg)
 }
 
 
+/* @brief   Read, modify, write to a peripheral register
+ *
+ */
+void hal_mmio_masked_write(void *reg, uint32_t mask, uint32_t val)
+{
+  uint32_t tmp;
+  
+  tmp = hal_mmio_read(reg);
+  tmp &= mask;
+  tmp |= val;
+  hal_mmio_write(reg, tmp);
+}
 

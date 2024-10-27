@@ -25,6 +25,7 @@ AC_CONFIG_FILES([
   librpimailbox/Makefile
   librpigpio/Makefile
   libfdthelper/Makefile
+  libprofiling/Makefile
   ])
   
 AC_OUTPUT

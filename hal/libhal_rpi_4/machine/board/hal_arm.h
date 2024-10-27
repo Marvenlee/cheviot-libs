@@ -61,6 +61,7 @@ typedef uint32_t pde_t;
 #define VM_USER_CEILING   							0x7F000000
 
 #define VM_KERNEL_BASE    							0x80000000
+#define VM_KERNEL_CEILING  							0xFFFFF000
 #define VM_IO_BASE 											0xFFF00000
 
 

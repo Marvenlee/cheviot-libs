@@ -14,8 +14,6 @@
 
 @SET_MAKE@
 
-# Raspberry Pi 1 HAL Library (for kernel, bootloader, serial and SD-Card drivers */
-
 
 VPATH = @srcdir@
 am__is_gnu_make = { \
@@ -91,7 +89,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = libhal_rpi_1
+subdir = libprofiling
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -136,11 +134,10 @@ AM_V_AR = $(am__v_AR_@AM_V@)
 am__v_AR_ = $(am__v_AR_@AM_DEFAULT_V@)
 am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
-librpihal_a_AR = $(AR) $(ARFLAGS)
-librpihal_a_LIBADD =
-am_librpihal_a_OBJECTS = hal_arm.$(OBJEXT) hal_mailbox.$(OBJEXT) \
-	hal_mmio.$(OBJEXT)
-librpihal_a_OBJECTS = $(am_librpihal_a_OBJECTS)
+libprofiling_a_AR = $(AR) $(ARFLAGS)
+libprofiling_a_LIBADD =
+am_libprofiling_a_OBJECTS = profiling.$(OBJEXT)
+libprofiling_a_OBJECTS = $(am_libprofiling_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -156,15 +153,8 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/hal_arm.Po \
-	./$(DEPDIR)/hal_mailbox.Po ./$(DEPDIR)/hal_mmio.Po
+am__depfiles_remade = ./$(DEPDIR)/profiling.Po
 am__mv = mv -f
-CPPASCOMPILE = $(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CCASFLAGS) $(CCASFLAGS)
-AM_V_CPPAS = $(am__v_CPPAS_@AM_V@)
-am__v_CPPAS_ = $(am__v_CPPAS_@AM_DEFAULT_V@)
-am__v_CPPAS_0 = @echo "  CPPAS   " $@;
-am__v_CPPAS_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_@AM_V@)
@@ -177,8 +167,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(librpihal_a_SOURCES)
-DIST_SOURCES = $(librpihal_a_SOURCES)
+SOURCES = $(libprofiling_a_SOURCES)
+DIST_SOURCES = $(libprofiling_a_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -304,23 +294,17 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-lib_LIBRARIES = librpihal.a
-librpihal_a_SOURCES = \
-  hal_arm.S \
-  hal_mailbox.c \
-  hal_mmio.c
+lib_LIBRARIES = libprofiling.a
+libprofiling_a_SOURCES = \
+  profiling.c
 
-nobase_include_HEADERS = machine/cheviot_hal.h \
-                         machine/board/hal_arm.h \
-                         machine/board/hal_mailbox.h \
-                         machine/board/hal_mmio.h
-
-AM_CFLAGS = -O2 -std=c99 -g0 -I.  -Wall
+nobase_include_HEADERS = sys/profiling.h
+AM_CFLAGS = -O2 -std=c99 -g0 -I.
 AM_CCASFLAGS = -r -I.
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .S .c .o .obj
+.SUFFIXES: .c .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -330,9 +314,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign libhal_rpi_1/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign libprofiling/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign libhal_rpi_1/Makefile
+	  $(AUTOMAKE) --foreign libprofiling/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -382,10 +366,10 @@ uninstall-libLIBRARIES:
 clean-libLIBRARIES:
 	-test -z "$(lib_LIBRARIES)" || rm -f $(lib_LIBRARIES)
 
-librpihal.a: $(librpihal_a_OBJECTS) $(librpihal_a_DEPENDENCIES) $(EXTRA_librpihal_a_DEPENDENCIES) 
-	$(AM_V_at)-rm -f librpihal.a
-	$(AM_V_AR)$(librpihal_a_AR) librpihal.a $(librpihal_a_OBJECTS) $(librpihal_a_LIBADD)
-	$(AM_V_at)$(RANLIB) librpihal.a
+libprofiling.a: $(libprofiling_a_OBJECTS) $(libprofiling_a_DEPENDENCIES) $(EXTRA_libprofiling_a_DEPENDENCIES) 
+	$(AM_V_at)-rm -f libprofiling.a
+	$(AM_V_AR)$(libprofiling_a_AR) libprofiling.a $(libprofiling_a_OBJECTS) $(libprofiling_a_LIBADD)
+	$(AM_V_at)$(RANLIB) libprofiling.a
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -393,31 +377,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_arm.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_mailbox.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hal_mmio.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/profiling.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
 	@echo '# dummy' >$@-t && $(am__mv) $@-t $@
 
 am--depfiles: $(am__depfiles_remade)
-
-.S.o:
-@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-@am__fastdepCCAS_TRUE@	$(CPPASCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-@am__fastdepCCAS_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(CPPASCOMPILE) -c -o $@ $<
-
-.S.obj:
-@am__fastdepCCAS_TRUE@	$(AM_V_CPPAS)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-@am__fastdepCCAS_TRUE@	$(CPPASCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-@am__fastdepCCAS_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCCAS_FALSE@	DEPDIR=$(DEPDIR) $(CCASDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCCAS_FALSE@	$(AM_V_CPPAS@am__nodep@)$(CPPASCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -585,9 +551,7 @@ clean: clean-am
 clean-am: clean-generic clean-libLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/hal_arm.Po
-	-rm -f ./$(DEPDIR)/hal_mailbox.Po
-	-rm -f ./$(DEPDIR)/hal_mmio.Po
+		-rm -f ./$(DEPDIR)/profiling.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -633,9 +597,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/hal_arm.Po
-	-rm -f ./$(DEPDIR)/hal_mailbox.Po
-	-rm -f ./$(DEPDIR)/hal_mmio.Po
+		-rm -f ./$(DEPDIR)/profiling.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

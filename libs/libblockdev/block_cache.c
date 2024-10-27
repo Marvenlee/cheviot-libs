@@ -58,7 +58,11 @@ struct block_cache *init_block_cache(int dev_fd, int buf_cnt, size_t block_size,
     panic("read_ahead_blocks > buf_cnt");    
   }
 	
-	if (read_ahead_blocks > 8 || read_ahead_blocks < 1) {
+	if (read_ahead_blocks < 1) {
+	  read_ahead_blocks = 1;
+	}
+	
+	if (read_ahead_blocks > 8) {
 	  read_ahead_blocks = 8;
 	}
 	

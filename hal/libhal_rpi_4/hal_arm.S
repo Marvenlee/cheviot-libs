@@ -282,22 +282,9 @@ hal_invalidate_tlb:
 	bx lr
 
 
-/* @brief   cache op helper macro
- */
-.macro calc_cache_lines
-	mrc p15, 0, r3, c0, c0, 1  /* Read the Cache Type Register */
-	lsr r3, r3, #16            /* DMinLine value */
-	and r3, r3, #0xf
-	mov r2, #4
-	mov r2, r2, lsl r3         /* Cache line size in bytes */
-	sub r3, r2, #1             /* Cache line size mask */
-	bic r0, r0, r3
-.endm
-
-
 .global hal_get_ccsidr
 hal_get_ccsidr:
-  mrc p15, 0, r0, c0, c0, 0
+  mrc p15, 1, r0, c0, c0, 0
   bx lr
 
 .global hal_cache_dcimvac
