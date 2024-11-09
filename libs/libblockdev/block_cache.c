@@ -30,7 +30,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/blockdev.h>
-#include <sys/fsreq.h>
 #include <sys/mount.h>
 #include <sys/panic.h>
 #include <sys/stat.h>
