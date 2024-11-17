@@ -39,6 +39,12 @@
 
 
 /*
+ * Libprofiling variable to control profiling
+ */
+int __libprofiling_enable = false;
+
+
+/*
  *
  */
 void profiling_init_samples(struct profiling_samples *ps)
@@ -52,10 +58,10 @@ void profiling_init_samples(struct profiling_samples *ps)
  */
 void profiling_add_sample(struct profiling_samples *ps, int val)
 {
-  if (ps->sample_cnt < MAX_PROFILING_SAMPLES) {
+  if (ps->sample_cnt < ps->window_size) {
     ps->window[ps->i] = val;
 
-    ps->i = (ps->i + 1) % MAX_PROFILING_SAMPLES;
+    ps->i = (ps->i + 1) % ps->window_size;
     ps->sample_cnt++;
 
     ps->sum += (int64_t)val;  
@@ -64,7 +70,7 @@ void profiling_add_sample(struct profiling_samples *ps, int val)
     int old_val = ps->window[ps->i];
     ps->window[ps->i] = val;
     
-    ps->i = (ps->i + 1) % MAX_PROFILING_SAMPLES;
+    ps->i = (ps->i + 1) % ps->window_size;
 
     ps->sum -= (int64_t)old_val;
     ps->sum += (int64_t)val;    
