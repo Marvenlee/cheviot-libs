@@ -36,6 +36,7 @@
 #include <sys/syscalls.h>
 #include <sys/debug.h>
 #include <unistd.h>
+#include <sys/mman.h>
 
 
 /* @brief   Initialize the block cache
@@ -65,11 +66,9 @@ struct block_cache *init_block_cache(int dev_fd, int buf_cnt, size_t block_size,
 	  read_ahead_blocks = 8;
 	}
 	
-	if ((cache = malloc (sizeof (struct block_cache))) != NULL) {
-		if ((cache->buf_table = (struct buf *)virtualalloc(NULL, buf_cnt * sizeof (struct buf), 
-		                                                   PROT_READWRITE)) != NULL) {
-			if ((cache->mem_pool = (char *)virtualalloc(NULL, buf_cnt * block_size, 
-			                                          PROT_READWRITE)) != NULL) {			
+	if ((cache = malloc(sizeof (struct block_cache))) != NULL) {
+		if ((cache->buf_table = mmap(NULL, buf_cnt * sizeof (struct buf), PROT_READ | PROT_WRITE, 0, -1, 0)) != MAP_FAILED) {
+			if ((cache->mem_pool = mmap(NULL, buf_cnt * block_size, PROT_READ | PROT_WRITE, 0, -1, 0)) != MAP_FAILED) {			
 				cache->dev_fd = dev_fd;
 				
 				
@@ -110,8 +109,8 @@ struct block_cache *init_block_cache(int dev_fd, int buf_cnt, size_t block_size,
  */
 void free_cache(struct block_cache *cache)
 {
-	virtualfree(cache->mem_pool, cache->buf_cnt * cache->block_size);
-	virtualfree(cache->buf_table, cache->buf_cnt * sizeof (struct buf));
+	munmap(cache->mem_pool, cache->buf_cnt * cache->block_size);
+	munmap(cache->buf_table, cache->buf_cnt * sizeof (struct buf));
 	free(cache);
 }
 
