@@ -40,7 +40,8 @@ typedef uint32_t pde_t;
 #define LARGE_PAGE_SIZE   	65536
 #define VPAGETABLE_SZ       4096
 #define VPTE_TABLE_OFFS     1024
-#define PAGEDIR_SZ          16384
+
+#define PAGEDIR_SIZE        16384
 
 #define N_PAGEDIR_PDE       4096
 #define N_PAGETABLE_PTE     256
