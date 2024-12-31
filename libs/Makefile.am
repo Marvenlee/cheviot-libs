@@ -2,4 +2,12 @@
 
 AM_CFLAGS = -O2 -std=c99 -g0
 
-SUBDIRS = libblockdev libcurses libtermcap librpimailbox librpigpio libfdthelper libprofiling
+SUBDIRS = libblockdev \
+          libcurses \
+          libtermcap \
+          librpimailbox \
+          librpigpio \
+          libfdthelper \
+          libprofiling \
+          libsysinit \
+          libsysinfo

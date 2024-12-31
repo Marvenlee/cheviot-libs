@@ -26,6 +26,8 @@ AC_CONFIG_FILES([
   librpigpio/Makefile
   libfdthelper/Makefile
   libprofiling/Makefile
+  libsysinit/Makefile
+  libsysinfo/Makefile
   ])
   
 AC_OUTPUT

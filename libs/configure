@@ -4476,7 +4476,7 @@ else
 fi
 
 
-ac_config_files="$ac_config_files Makefile libblockdev/Makefile libcurses/Makefile libtermcap/Makefile librpimailbox/Makefile librpigpio/Makefile libfdthelper/Makefile libprofiling/Makefile"
+ac_config_files="$ac_config_files Makefile libblockdev/Makefile libcurses/Makefile libtermcap/Makefile librpimailbox/Makefile librpigpio/Makefile libfdthelper/Makefile libprofiling/Makefile libsysinit/Makefile libsysinfo/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -5236,6 +5236,8 @@ do
     "librpigpio/Makefile") CONFIG_FILES="$CONFIG_FILES librpigpio/Makefile" ;;
     "libfdthelper/Makefile") CONFIG_FILES="$CONFIG_FILES libfdthelper/Makefile" ;;
     "libprofiling/Makefile") CONFIG_FILES="$CONFIG_FILES libprofiling/Makefile" ;;
+    "libsysinit/Makefile") CONFIG_FILES="$CONFIG_FILES libsysinit/Makefile" ;;
+    "libsysinfo/Makefile") CONFIG_FILES="$CONFIG_FILES libsysinfo/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
