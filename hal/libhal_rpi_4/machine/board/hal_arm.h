@@ -338,5 +338,13 @@ void hal_set_cpacr(uint32_t val);
 uint32_t hal_get_fpexc(void);
 void hal_set_fpexc(uint32_t val);
 
+uint32_t hal_get_tpidr(void);
+void hal_set_tpidr(uint32_t val);
+uint32_t hal_get_tpidrro(void);
+void hal_set_tpidrro(uint32_t val);
+uint32_t hal_get_tpidrk(void);
+void hal_set_tpidrk(uint32_t val);
+
+
 
 #endif

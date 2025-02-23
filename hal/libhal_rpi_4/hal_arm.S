@@ -46,6 +46,18 @@
 .global hal_invalidate_tlb_va
 .global hal_invalidate_tlb
 
+.global hal_get_ccsidr
+.global hal_cache_dcimvac
+.global hal_cache_dccmvac
+.global hal_cache_dccimvac
+
+.global hal_get_tpidr
+.global hal_set_tpidr
+.global hal_get_tpidrro
+.global hal_set_tpidrro
+.global hal_get_tpidrk
+.global hal_set_tpidrk
+
 
 .section .text
 
@@ -282,27 +294,56 @@ hal_invalidate_tlb:
 	bx lr
 
 
-.global hal_get_ccsidr
 hal_get_ccsidr:
   mrc p15, 1, r0, c0, c0, 0
   bx lr
 
-.global hal_cache_dcimvac
+
 hal_cache_dcimvac:
 	mcr p15, 0, r0, c7, c6, 1
 	bx lr
+
 	
-.global hal_cache_dccmvac
 hal_cache_dccmvac:
 	mcr p15, 0, r0, c7, c10, 1
   bx lr
   
 
-.global hal_cache_dccimvac
 hal_cache_dccimvac:
 	mcr p15, 0, r0, c7, c14, 1
   bx lr
-  
+
+
+hal_get_tpidr:
+  mrc p15, 0, r0, c13, c0, 2
+  bx lr
+
+
+hal_set_tpidr:
+  mcr p15, 0, r0, c13, c0, 2 
+  bx lr
+
+
+hal_get_tpidrro:
+  mrc p15, 0, r0, c13, c0, 3  
+  bx lr
+
+
+hal_set_tpidrro:
+  mcr p15, 0, r0, c13, c0, 3
+  bx lr
+
+
+hal_get_tpidrk:
+  mcr p15, 0, r0, c13, c0, 4
+  bx lr
+
+
+hal_set_tpidrk:
+  mcr p15, 0, r0, c13, c0, 4
+  bx lr
+
+
 .end
 
 
