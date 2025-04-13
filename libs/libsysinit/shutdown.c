@@ -39,7 +39,7 @@ int sysinit_shutdown(int how)
   req.cmd = SYSINIT_SHUTDOWN;
   req.u.shutdown.how = how;
   
-  sc = sendmsg(fd, MSG_SUBCLASS_SYSINIT, 1, siov, 0, NULL);
+  sc = sendio(fd, MSG_SUBCLASS_SYSINIT, 1, siov, 0, NULL);
 
 	close(fd);
   

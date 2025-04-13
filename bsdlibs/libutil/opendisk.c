@@ -64,7 +64,7 @@ __opendisk(const char *path, int flags, char *buf, size_t buflen, int iscooked,
 
 #if defined(__cheviotos)
 	/*
-	 * MINIX does not have the cooked/raw distinction.  Do not prepend 'r'
+	 * CheviotOS does not have the cooked/raw distinction.  Do not prepend 'r'
 	 * to the device name when generating a full path.
 	 */
 	iscooked = 1;

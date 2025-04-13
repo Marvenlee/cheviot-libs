@@ -4360,7 +4360,7 @@ fi
 #AM_PROG_LEX
 #AC_PROG_YACC
 
-ac_config_files="$ac_config_files Makefile libcrypt/Makefile libdb/Makefile libutil/Makefile"
+ac_config_files="$ac_config_files Makefile libcrypt/Makefile libdb/Makefile libutil/Makefile libterminfo/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -5108,6 +5108,7 @@ do
     "libcrypt/Makefile") CONFIG_FILES="$CONFIG_FILES libcrypt/Makefile" ;;
     "libdb/Makefile") CONFIG_FILES="$CONFIG_FILES libdb/Makefile" ;;
     "libutil/Makefile") CONFIG_FILES="$CONFIG_FILES libutil/Makefile" ;;
+    "libterminfo/Makefile") CONFIG_FILES="$CONFIG_FILES libterminfo/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

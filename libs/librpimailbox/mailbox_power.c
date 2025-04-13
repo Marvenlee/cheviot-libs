@@ -31,7 +31,7 @@ int rpi_mailbox_get_power_state(uint32_t device_id, uint32_t *state)
   req.cmd = MBOX_TAG_GET_POWER_STATE;
   req.u.get_power_state.device_id = device_id;
   
-  sc = sendmsg(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 1, riov);
+  sc = sendio(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 1, riov);
   
 	if (sc != 0) {
 		return -1;
@@ -52,7 +52,7 @@ int rpi_mailbox_set_power_state(uint32_t device_id, uint32_t state)
   req.u.set_power_state.device_id = device_id;
   req.u.set_power_state.state = state;
   
-  sc = sendmsg(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 0, NULL);
+  sc = sendio(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 0, NULL);
   
 	if (sc != 0) {
 		return -1;

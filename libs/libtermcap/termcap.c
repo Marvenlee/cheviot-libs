@@ -324,7 +324,6 @@ int affcnt;
 void (*outc)(int ch);
 {
   if (cp == (char *)NULL) return(1);
-  /* Do any padding interpretation - left null for MINIX just now */
   while (*cp) (*outc) (*cp++);
   return(1);
 }

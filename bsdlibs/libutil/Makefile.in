@@ -139,7 +139,8 @@ am_libutil_a_OBJECTS = efun.$(OBJEXT) login.$(OBJEXT) loginx.$(OBJEXT) \
 	logout.$(OBJEXT) logwtmp.$(OBJEXT) passwd.$(OBJEXT) \
 	pw_scan.$(OBJEXT) pidfile.$(OBJEXT) pidlock.$(OBJEXT) \
 	raise_default_signal.$(OBJEXT) secure_path.$(OBJEXT) \
-	strpct.$(OBJEXT) ttyaction.$(OBJEXT) getusershell.$(OBJEXT)
+	strpct.$(OBJEXT) ttyaction.$(OBJEXT) getusershell.$(OBJEXT) \
+	login_tty.$(OBJEXT)
 libutil_a_OBJECTS = $(am_libutil_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -157,12 +158,13 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/efun.Po ./$(DEPDIR)/getusershell.Po \
-	./$(DEPDIR)/login.Po ./$(DEPDIR)/loginx.Po \
-	./$(DEPDIR)/logout.Po ./$(DEPDIR)/logwtmp.Po \
-	./$(DEPDIR)/passwd.Po ./$(DEPDIR)/pidfile.Po \
-	./$(DEPDIR)/pidlock.Po ./$(DEPDIR)/pw_scan.Po \
-	./$(DEPDIR)/raise_default_signal.Po ./$(DEPDIR)/secure_path.Po \
-	./$(DEPDIR)/strpct.Po ./$(DEPDIR)/ttyaction.Po
+	./$(DEPDIR)/login.Po ./$(DEPDIR)/login_tty.Po \
+	./$(DEPDIR)/loginx.Po ./$(DEPDIR)/logout.Po \
+	./$(DEPDIR)/logwtmp.Po ./$(DEPDIR)/passwd.Po \
+	./$(DEPDIR)/pidfile.Po ./$(DEPDIR)/pidlock.Po \
+	./$(DEPDIR)/pw_scan.Po ./$(DEPDIR)/raise_default_signal.Po \
+	./$(DEPDIR)/secure_path.Po ./$(DEPDIR)/strpct.Po \
+	./$(DEPDIR)/ttyaction.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -304,7 +306,8 @@ libutil_a_SOURCES = \
 	raise_default_signal.c \
 	secure_path.c  \
 	strpct.c ttyaction.c \
-	getusershell.c
+	getusershell.c \
+	login_tty.c
 
 
 #ttymsg.c
@@ -408,6 +411,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/efun.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getusershell.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/login.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/login_tty.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loginx.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logout.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logwtmp.Po@am__quote@ # am--include-marker
@@ -592,6 +596,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/efun.Po
 	-rm -f ./$(DEPDIR)/getusershell.Po
 	-rm -f ./$(DEPDIR)/login.Po
+	-rm -f ./$(DEPDIR)/login_tty.Po
 	-rm -f ./$(DEPDIR)/loginx.Po
 	-rm -f ./$(DEPDIR)/logout.Po
 	-rm -f ./$(DEPDIR)/logwtmp.Po
@@ -651,6 +656,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/efun.Po
 	-rm -f ./$(DEPDIR)/getusershell.Po
 	-rm -f ./$(DEPDIR)/login.Po
+	-rm -f ./$(DEPDIR)/login_tty.Po
 	-rm -f ./$(DEPDIR)/loginx.Po
 	-rm -f ./$(DEPDIR)/logout.Po
 	-rm -f ./$(DEPDIR)/logwtmp.Po

@@ -94,8 +94,10 @@ openpty(int *amaster, int *aslave, char *name, struct termios *term,
 	}
 #else
 	/*
-	 * On MINIX3, we implement non-root openpty(3) using Unix98 PTYs.
+	 * On MINIX3, it implements non-root openpty(3) using Unix98 PTYs.
 	 * If this fails, the fallback code below works for root only.
+	 *
+	 * TODO: What to do on CheviotOS?
 	 */
 	if ((master = posix_openpt(O_RDWR | O_NOCTTY)) != -1) {
 		if (grantpt(master) != -1 && unlockpt(master) != -1 &&

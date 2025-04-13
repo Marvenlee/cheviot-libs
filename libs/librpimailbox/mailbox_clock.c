@@ -34,7 +34,7 @@ int rpi_mailbox_get_clock_state(uint32_t device_id, uint32_t *state)
   req.cmd = MBOX_TAG_GET_CLOCK_STATE;
   req.u.get_clock_state.device_id = device_id;
   
-  sc = sendmsg(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 1, riov);
+  sc = sendio(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 1, riov);
   
 	if (sc != 0) {
 		return -1;
@@ -58,7 +58,7 @@ int rpi_mailbox_set_clock_state(uint32_t device_id, uint32_t state)
   req.u.set_clock_state.device_id = device_id;
   req.u.set_clock_state.state = state;
   
-  sc = sendmsg(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 0, NULL);
+  sc = sendio(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 0, NULL);
   
 	if (sc != 0) {
 		return -1;
@@ -81,7 +81,7 @@ int rpi_mailbox_get_clock_rate(uint32_t device_id, uint32_t *rate)
   req.cmd = MBOX_TAG_GET_CLOCK_RATE;
   req.u.get_clock_rate.device_id = device_id;
   
-  sc = sendmsg(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 1, riov);
+  sc = sendio(_mailbox_fd, MSG_SUBCLASS_RPIMAILBOX, 1, siov, 1, riov);
   
 	if (sc != 0) {
 		return -1;

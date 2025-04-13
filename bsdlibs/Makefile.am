@@ -1,2 +1,3 @@
-SUBDIRS = libcrypt libdb libutil
+SUBDIRS = libcrypt libdb libutil libterminfo
+
 

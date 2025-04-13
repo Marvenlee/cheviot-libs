@@ -12,6 +12,7 @@ AC_CONFIG_FILES([
   libcrypt/Makefile
   libdb/Makefile
   libutil/Makefile  
+  libterminfo/Makefile
   ])
   
 AC_OUTPUT

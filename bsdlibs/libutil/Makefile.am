@@ -8,7 +8,8 @@ libutil_a_SOURCES = \
 	raise_default_signal.c \
 	secure_path.c  \
 	strpct.c ttyaction.c \
-	getusershell.c
+	getusershell.c \
+	login_tty.c
 	
 #ttymsg.c
 #stat_flags.c 

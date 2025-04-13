@@ -64,7 +64,7 @@ int set_gpio(int gpio, int state)
   header.u.setgpio.gpio = gpio;
   header.u.setgpio.state = state;
   
-	return sendmsg(_gpio_fd, MSG_SUBCLASS_GPIO, 1, siov, 0, NULL);
+	return sendio(_gpio_fd, MSG_SUBCLASS_GPIO, 1, siov, 0, NULL);
 }
 
 
@@ -79,7 +79,7 @@ int get_gpio(int gpio)
   header.cmd = MSG_CMD_GETGPIO;
   header.u.getgpio.gpio = gpio;
   
-	return sendmsg(_gpio_fd, MSG_SUBCLASS_GPIO, 1, siov, 0, NULL);
+	return sendio(_gpio_fd, MSG_SUBCLASS_GPIO, 1, siov, 0, NULL);
 }
 
 
